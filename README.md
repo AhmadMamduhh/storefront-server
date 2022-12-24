@@ -24,7 +24,7 @@ JWT_TOKEN_SECRET=ssaxauhsqkdhwhdkqwb152!
 # package.json scripts
 "start": "node src/server.ts" (starts the server),
 "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\" (starts the server and watches for changes),
-"build": "npx tsc" (builds the project, converts TS into JS),
+"build": "npx tsc --outDir ./dist" (builds the project, converts TS into JS, saves output in ./dist folder),
 "db-migrate-up": "db-migrate up" (Performs the up migration which is to create the tables defined in the schema),
 "db-migrate-down": "db-migrate down --count 4" (performs the down migration which is to drop the tables defined in the schema),
 "db-migrate-up-test": "db-migrate --env test up" (performs the up migration on the test database),
