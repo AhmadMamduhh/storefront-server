@@ -1,54 +1,46 @@
 # Storefront Backend Project
 
-## Getting Started
+# Installation Guide
+1- Run yarn install to download all necessary packages.
+2- Update the .env file to include the properties of your local database server (POSTGRES_HOST, POSTGRES_USER, POSTGRES_DB, POSTGRES_DB_TEST, POSTGRES_PASSWORD).
+3- Update the database.json file to include the same properties as above.
+4- Run yarn db-migrate-up script to create all the tables necessary.
+5- Run yarn test to run all test scripts.
+6- Run yarn watch to run the server.
 
-This repo contains a basic Node and Express app to get you started in constructing an API. To get started, clone this repo and run `yarn` in your terminal at the project root.
+NOTE: Please review and update the script for testing based on the requirements of your operating system. 
 
-## Required Technologies
-Your application must make use of the following libraries:
-- Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
+# Environment Variables
+POSTGRES_HOST=localhost
+POSTGRES_USER=postgres
+POSTGRES_DB=storefront
+POSTGRES_DB_TEST=storefront_test
+POSTGRES_PASSWORD=Ahmed@123
+ENV=dev
+BCRYPT_PEPPER=random-password-pepper
+SALT_ROUNDS=10
+JWT_TOKEN_SECRET=ssaxauhsqkdhwhdkqwb152!
 
-## Steps to Completion
+# package.json scripts
+"start": "node src/server.ts" (starts the server),
+"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\" (starts the server and watches for changes),
+"build": "npx tsc" (builds the project, converts TS into JS),
+"db-migrate-up": "db-migrate up" (Performs the up migration which is to create the tables defined in the schema),
+"db-migrate-down": "db-migrate down --count 4" (performs the down migration which is to drop the tables defined in the schema),
+"db-migrate-up-test": "db-migrate --env test up" (performs the up migration on the test database),
+"db-migrate-down-test": "db-migrate --env test down --count 4" (performs the down migration on the test database),
+"test": "export ENV=test&& yarn db-migrate-down-test && yarn db-migrate-up-test && jasmine-ts && yarn db-migrate-down-test" (down migrates the test DB, up migrates the test DB, then runs the tests defined in the tests folder then down migrates the test DB)
 
-### 1. Plan to Meet Requirements
+# Ports
+Server runs on port 3003
+Database on port 5432
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API. 
 
-Your first task is to read the requirements and update the document with the following:
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.    
-**Example**: A SHOW route: 'blogs/:id' [GET] 
+# API endpoints
+All endpoints are described in the REQUIREMENT.md file.
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.   
-**Example**: You can format this however you like but these types of information should be provided
-Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+Authentication tokens are passed in the HTTP header in this format: 'Authorization: Bearer `token`'
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape. 
-
-### 2.  DB Creation and Migrations
-
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder. 
-
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
-
-### 3. Models
-
-Create the models for each database table. The methods in each model should map to the endpoints in `REQUIREMENTS.md`. Remember that these models should all have test suites and mocks.
-
-### 4. Express Handlers
-
-Set up the Express handlers to route incoming requests to the correct model method. Make sure that the endpoints you create match up with the enpoints listed in `REQUIREMENTS.md`. Endpoints must have tests and be CORS enabled. 
-
-### 5. JWTs
-
-Add JWT functionality as shown in the course. Make sure that JWTs are required for the routes listed in `REQUIUREMENTS.md`.
-
-### 6. QA and `README.md`
-
-Before submitting, make sure that your project is complete with a `README.md`. Your `README.md` must include instructions for setting up and running your project including how you setup, run, and connect to your database. 
-
-Before submitting your project, spin it up and test each endpoint. If each one responds with data that matches the data shapes from the `REQUIREMENTS.md`, it is ready for submission!
+# Requirements File
+In order to view the requirements file, please make sure to use a markdown viewer such as: https://onlinemarkdowneditor.dev/ 
+This is to ensure the good presentation and styling of the API endpoints and Database schema documentation.
