@@ -1,3 +1,4 @@
+
 # Storefront Backend Project
 
 # Installation Guide
@@ -11,24 +12,33 @@
 NOTE: Please review and update the script for testing based on the requirements of your operating system. 
 
 # Environment Variables
-POSTGRES_HOST=localhost
-POSTGRES_USER=postgres
-POSTGRES_DB=storefront
-POSTGRES_DB_TEST=storefront_test
-POSTGRES_PASSWORD=Ahmed@123
-ENV=dev
-BCRYPT_PEPPER=random-password-pepper
-SALT_ROUNDS=10
-JWT_TOKEN_SECRET=ssaxauhsqkdhwhdkqwb152!
+
+    POSTGRES_HOST=localhost
+    POSTGRES_USER=postgres
+    POSTGRES_DB=storefront
+    POSTGRES_DB_TEST=storefront_test
+    POSTGRES_PASSWORD=Ahmed@123
+    ENV=dev
+    BCRYPT_PEPPER=random-password-pepper
+    SALT_ROUNDS=10
+    JWT_TOKEN_SECRET=ssaxauhsqkdhwhdkqwb152!
 
 # package.json scripts
 "start": "node src/server.ts" (starts the server),
-"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\" (starts the server and watches for changes),
+
+"watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess 
+\"node ./dist/server.js\" (starts the server and watches for changes),
+
 "build": "npx tsc --outDir ./dist" (builds the project, converts TS into JS, saves output in ./dist folder),
+
 "db-migrate-up": "db-migrate up" (Performs the up migration which is to create the tables defined in the schema),
+
 "db-migrate-down": "db-migrate down --count 4" (performs the down migration which is to drop the tables defined in the schema),
+
 "db-migrate-up-test": "db-migrate --env test up" (performs the up migration on the test database),
+
 "db-migrate-down-test": "db-migrate --env test down --count 4" (performs the down migration on the test database),
+
 "test": "export ENV=test&& yarn db-migrate-down-test && yarn db-migrate-up-test && jasmine-ts && yarn db-migrate-down-test" (down migrates the test DB, up migrates the test DB, then runs the tests defined in the tests folder then down migrates the test DB)
 
 # Ports
